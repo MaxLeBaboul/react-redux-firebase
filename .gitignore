@@ -10,8 +10,9 @@
 
 # production
 /build
+/.history
 
-.history
+
 
 
 # misc
