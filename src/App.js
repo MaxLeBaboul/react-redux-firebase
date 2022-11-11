@@ -1,9 +1,14 @@
 import React from "react";
+import ConnectModal from "./components/ConnectModal";
+// import SignUp from "./components/SignUp";
 
 const App = () => {
   return (
     <div>
-      <h1>Hello App</h1>
+      <div className="app-header">
+        <ConnectModal />
+      </div>
+      <div className="posts-container"></div>
     </div>
   );
 };
