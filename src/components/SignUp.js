@@ -4,26 +4,38 @@ import { auth } from "../utils/firebase.config";
 const SignUp = () => {
   const registerEmail = useRef();
   const registerPassword = useRef();
+  const [displayName, setDisplayName] = useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
 
     try {
-        auth.createUserWithEmailAndPassword(
+      auth
+        .createUserWithEmailAndPassword(
           registerEmail.current.value,
           registerPassword.current.value
-        );
+        )
+        .then(async (userAuth) => {
+          await userAuth.user.updateProfile({
+            displayName,
+          });
+          console.log(userAuth);
+        });
     } catch (error) {
       console.error(error);
     }
-    console.log(registerEmail.current.value, registerPassword.current.value);
   };
   return (
     <div className="signup-container">
       <div className="signup">
         <h3>S'inscrire</h3>
         <form onSubmit={(e) => handleRegister(e)}>
-          <input type="text" placeholder="Pseudo" required />
+          <input
+            type="text"
+            placeholder="Pseudo"
+            onChange={(e) => setDisplayName(e.target.value)}
+            required
+          />
           <input
             type="email"
             placeholder="Email"
